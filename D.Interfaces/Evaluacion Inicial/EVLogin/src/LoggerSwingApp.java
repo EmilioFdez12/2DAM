@@ -82,23 +82,27 @@ public class LoggerSwingApp extends JFrame {
             }
         };
         contentPane.setLayout(null);
+        
+        String fuente = "Monospaced";
+        
 
         JLabel lblUsername = new JLabel("Username");
         lblUsername.setForeground(new Color(152, 148, 61));
-        lblUsername.setFont(new Font("Monospaced", Font.BOLD, 26));
+        lblUsername.setFont(new Font(fuente, Font.BOLD, 26));
         lblUsername.setBounds(33, 33, 143, 32);
         contentPane.add(lblUsername);
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setForeground(new Color(152, 148, 61));
-        lblPassword.setFont(new Font("Monospaced", Font.BOLD, 26));
+        lblPassword.setFont(new Font(fuente, Font.BOLD, 26));
         lblPassword.setBounds(33, 88, 143, 32);
         contentPane.add(lblPassword);
-
+        
+        
         textUsername = new JTextField();
         textUsername.setHorizontalAlignment(SwingConstants.CENTER);
         textUsername.setForeground(new Color(152, 148, 61));
-        textUsername.setFont(new Font("Monospaced", Font.BOLD | Font.ITALIC, 18));
+        textUsername.setFont(new Font(fuente, Font.BOLD | Font.ITALIC, 18));
         textUsername.setBackground(new Color(3, 49, 118));
         textUsername.setBounds(173, 38, 150, 25);
         textUsername.setOpaque(false);
@@ -109,7 +113,7 @@ public class LoggerSwingApp extends JFrame {
         passwordField.setHorizontalAlignment(SwingConstants.CENTER);
         passwordField.setForeground(new Color(152, 148, 61));
         passwordField.setOpaque(false);
-        passwordField.setFont(new Font("Monospaced", Font.BOLD, 24));
+        passwordField.setFont(new Font(fuente, Font.BOLD, 24));
         passwordField.setBackground(new Color(3, 49, 118));
         passwordField.setBounds(173, 93, 150, 25);
         contentPane.add(passwordField);
@@ -118,7 +122,7 @@ public class LoggerSwingApp extends JFrame {
         chckbxRemember.setForeground(new Color(152, 148, 61));
         chckbxRemember.setBackground(new Color(0,0,0));
         chckbxRemember.setOpaque(false);
-        chckbxRemember.setFont(new Font("Monospaced", Font.BOLD, 16));
+        chckbxRemember.setFont(new Font(fuente, Font.BOLD, 16));
         chckbxRemember.setBounds(180, 142, 143, 23);
         contentPane.add(chckbxRemember);
 
@@ -138,13 +142,13 @@ public class LoggerSwingApp extends JFrame {
         });
         btnLogin.setForeground(new Color(255, 255, 255));
         btnLogin.setBackground(new Color(3, 49, 118));
-        btnLogin.setFont(new Font("Monospaced", Font.BOLD, 18));
+        btnLogin.setFont(new Font(fuente, Font.BOLD, 18));
         btnLogin.setBounds(48, 183, 115, 30);
         contentPane.add(btnLogin);
 
         JButton btnRegister = new JButton("REGISTER");
         btnRegister.setForeground(Color.WHITE);
-        btnRegister.setFont(new Font("Monospaced", Font.BOLD, 18));
+        btnRegister.setFont(new Font(fuente, Font.BOLD, 18));
         btnRegister.setBackground(new Color(3, 49, 118));
         btnRegister.setBounds(193, 183, 130, 30);
         contentPane.add(btnRegister);
