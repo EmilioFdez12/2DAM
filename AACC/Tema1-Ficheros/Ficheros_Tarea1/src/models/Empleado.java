@@ -8,6 +8,12 @@ public class Empleado implements Serializable {
 	private int edad;
 	private int num_empleados;
 
+	/**
+	 * Empleado
+	 * @param empresa Nombre de la empresa
+	 * @param edad Edad del empleado
+	 * @param num_empleados Numero de personas que tiene a cargo el empleado
+	 */
 	public Empleado(String empresa, int edad, int num_empleados) {
 		this.empresa = empresa;
 		this.edad = edad;
