@@ -38,17 +38,19 @@ public class UtilsFicheroArray {
 	        }
 	        return empleados;
 	    }
-	 
+	
 	 public static void toArchivoTexto(List<Empleado> empleados) {
 		    try (BufferedWriter escritor = new BufferedWriter(new FileWriter("..\\arch\\empleados.txt"))) {
 		        // Escribir cabecera en el archivo
 		        escritor.write("EMPRESA,EDAD,NUM_EMPLEADOS");
 		        
-		        // Escribir cada empleado en el archivo
+		        // Escribimos cada empleado en el archivo
 		        for (Empleado emp : empleados) {
 		            escritor.write("\"" + emp.getEmpresa() + "\",\"" + emp.getEdad() + "\",\"" + emp.getNum_empleados() + "\"");
 		            escritor.newLine();
 		        }
+		       
+		       
 		    } catch (IOException e) {
 		        
 		    }
@@ -56,7 +58,7 @@ public class UtilsFicheroArray {
 	 
 	 public static void toArchivoBinarioInverso(List<Empleado> empleados) {
 		    try (ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream("..\\arch\\empleados.txt"))) {
-		        // Escribir empleados en orden inverso
+		        // Escribimos los empleados en orden inverso
 		        for (int i = empleados.size() - 1; i >= 0; i--) {
 		            escritor.writeObject(empleados.get(i));
 		        }
@@ -80,7 +82,7 @@ public class UtilsFicheroArray {
 	
 	public static void leerEmpleadosB(String archivo) {
 		try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(archivo))){
-			String linea = reader.readObject();
+			String linea = (String) reader.readObject();
 			while (linea != null) {
 				System.out.println(linea);
 			}
@@ -89,6 +91,7 @@ public class UtilsFicheroArray {
 		}
 		
 	}
+	
 		
 		    
 		

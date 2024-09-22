@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "63334213750",
+    "project_id": "twitterdesdecero",
+    "storage_bucket": "twitterdesdecero.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63334213750:android:5b6422f19e80f3ee8c5757",
+        "android_client_info": {
+          "package_name": "com.example.twtterprueba1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAByKF1sv0p7IouCjbj93mXjEXkkIzPRxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
