@@ -55,7 +55,7 @@ public class MainApp {
 		for (char letra : mensaje.toCharArray()) {
 			System.out.print(letra);
 			try {
-				Thread.sleep(25);
+				Thread.sleep(10);//Tiempo entre ch y ch
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}

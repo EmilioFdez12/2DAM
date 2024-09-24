@@ -32,7 +32,6 @@ public class UtilsFicheroArray {
 				int edad = Integer.parseInt(campos[1].replace("\"", ""));
 				int numEmpleados = Integer.parseInt(campos[2].replace("\"", ""));
 				empleados.add(new Empleado(empresa, edad, numEmpleados));
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
