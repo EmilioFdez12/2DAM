@@ -9,10 +9,12 @@ public class CSVConversorApp {
 		String archivoCSV = "archivos/datos.csv";
 		String archivoDat = "archivos/datos.dat";
 
+		
+
 		try {
 			// Convierte CSV a Binario
 			CSVUtils.fichero_CSV_To_Binario(archivoCSV);
-
+			
 			// Convierte Binario a CSV
 			CSVUtils.fichero_Binario_To_CSV(archivoDat);
 

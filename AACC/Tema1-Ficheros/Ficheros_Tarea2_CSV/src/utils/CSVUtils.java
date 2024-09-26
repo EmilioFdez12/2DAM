@@ -42,9 +42,9 @@ public class CSVUtils {
 	 * @throws ClassNotFoundException Si ocurre un error durante la deserialización
 	 *                                de objetos.
 	 */
-	public static void fichero_Binario_To_CSV(String archivoBinario) throws IOException, ClassNotFoundException {
+	public static void fichero_Binario_To_CSV(String archivoBinario) {
 		// Verificamos que el archivo tenga la extensión correcta.
-		verificarExtension(archivoBinario, ".dat");
+		verificarExtension(archivoBinario , ".dat");
 		// Generamos el nombre para el archivo CSV.
 		String archivoCSV = archivoBinario.replace(".dat", ".csv");
 
@@ -57,10 +57,12 @@ public class CSVUtils {
 				escritor.write(objeto.toString());
 				escritor.newLine();
 			}
-		} catch (EOFException ignored) {
-			// Ignoramos el final del archivo, que genera una excepción EOF.
+		} catch (EOFException e) {
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
 		}
-		registrarLog("fichero_Binario_To_CSV", archivoBinario, archivoCSV); // Registramos la conversión en el log.
+		// Registramos en el log.
+		registrarLog("fichero_Binario_To_CSV", archivoBinario, archivoCSV);
 	}
 
 	/**
@@ -70,14 +72,29 @@ public class CSVUtils {
 	 * @throws IOException Si ocurre algún error durante la lectura o escritura del
 	 *                     archivo.
 	 */
-	public static void ordenar_Archivo_CSV(String archivoCSV) throws IOException {
+	public static void ordenar_Archivo_CSV(String archivoCSV) {
 		// Verificamos que el archivo tenga la extensión correcta.
 		verificarExtension(archivoCSV, ".csv");
 		// Generamos el nombre para el archivo ordenado.
 		String archivoOrdenado = archivoCSV.replace(".csv", "_ord.csv");
 
-		// Creamos una lista con todas las líneas y las ordenamos.
-		List<String> lineas = Files.readAllLines(Paths.get(archivoCSV));
+		// Lista para guardar cada linea del archivo
+		List<String> lineas = new  ArrayList<>();
+		try (ObjectInputStream lector = new ObjectInputStream(new FileInputStream(archivoCSV))){
+			while (true) {
+				lineas.add(lector.readObject().toString());
+			}
+			
+		} catch (FileNotFoundException e1) {
+			
+		} catch (IOException e1) {
+			
+		} catch (ClassNotFoundException e) {
+		}
+				
+			
+	
+		
 		// Ordenamos las líneas ignorando mayúsculas y minúsculas.
 		Collections.sort(lineas, String.CASE_INSENSITIVE_ORDER);
 
@@ -87,9 +104,10 @@ public class CSVUtils {
 				escritor.write(linea);
 				escritor.newLine();
 			}
+		} catch (IOException e) {
+
 		}
 
-		// Registramos la ordenación en el log.
 		registrarLog("ordenar_Archivo_CSV", archivoCSV, archivoOrdenado);
 	}
 
@@ -102,7 +120,7 @@ public class CSVUtils {
 	 * @throws ClassNotFoundException Si ocurre un error durante la deserialización
 	 *                                de objetos.
 	 */
-	public static void ordenar_Archivo_Binario(String archivoBinario) throws IOException, ClassNotFoundException {
+	public static void ordenar_Archivo_Binario(String archivoBinario) throws IOException {
 		// Verificamos que el archivo tenga la extensión correcta.
 		verificarExtension(archivoBinario, ".dat");
 		// Generamos el nombre para el archivo ordenado
@@ -111,26 +129,25 @@ public class CSVUtils {
 		List<String> lineas = new ArrayList<>();
 
 		try (ObjectInputStream lector = new ObjectInputStream(new FileInputStream(archivoBinario))) {
-			Object objeto;
-			while ((objeto = lector.readObject()) != null) {
+			while (true) {
 				// Almacenamos cada objeto como cadena de texto.
-				lineas.add(objeto.toString());
+				lineas.add(lector.readObject().toString());
 			}
-		} catch (EOFException e) {
+		} catch (IOException | ClassNotFoundException e) {
 
-		}
+			// Ordenamos las líneas ignorando mayúsculas y minúsculas.
+			Collections.sort(lineas, String.CASE_INSENSITIVE_ORDER);
 
-		// Ordenamos las líneas ignorando mayúsculas y minúsculas.
-		Collections.sort(lineas, String.CASE_INSENSITIVE_ORDER);
+			try (ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(archivoOrdenado))) {
+				for (String linea : lineas) {
+					// Escribimos las líneas ordenadas en el archivo binario.
+					escritor.writeObject(linea);
+				}
+			} catch (IOException e1) {
 
-		try (ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(archivoOrdenado))) {
-			for (String linea : lineas) {
-				// Escribimos las líneas ordenadas en el archivo binario.
-				escritor.writeObject(linea);
 			}
+			registrarLog("ordenar_Archivo_Binario", archivoBinario, archivoOrdenado);
 		}
-		// Registramos la ordenación en el log.
-		registrarLog("ordenar_Archivo_Binario", archivoBinario, archivoOrdenado);
 	}
 
 	/**
@@ -143,7 +160,8 @@ public class CSVUtils {
 	 * @throws ClassNotFoundException Si ocurre un error durante la deserialización
 	 *                                de objetos.
 	 */
-	public static void fichero_Binario_To_CSV_Ordenado(String archivoBinario) throws IOException, ClassNotFoundException {
+	public static void fichero_Binario_To_CSV_Ordenado(String archivoBinario)
+			throws IOException, ClassNotFoundException {
 		// Verificamos que el archivo tenga la extensión correcta.
 		verificarExtension(archivoBinario, ".dat");
 		// Generamos el nombre para el archivo CSV ordenado.
@@ -152,10 +170,9 @@ public class CSVUtils {
 		List<String> lineas = new ArrayList<>();
 
 		try (ObjectInputStream lector = new ObjectInputStream(new FileInputStream(archivoBinario))) {
-			Object objeto;
-			while ((objeto = lector.readObject()) != null) {
+			while (true) {
 				// Almacenamos cada objeto como cadena de texto.
-				lineas.add(objeto.toString());
+				lineas.add(lector.readObject().toString());
 			}
 		} catch (EOFException e) {
 
@@ -171,7 +188,8 @@ public class CSVUtils {
 				escritor.newLine();
 			}
 		}
-		registrarLog("fichero_Binario_To_CSV_Ordenado", archivoBinario, archivoCSV); // Registramos la conversión en el log.
+		// Registramos en el log
+		registrarLog("fichero_Binario_To_CSV_Ordenado", archivoBinario, archivoCSV);
 	}
 
 	/**
@@ -197,18 +215,22 @@ public class CSVUtils {
 	 * @throws IOException Si ocurre algún error durante la escritura del archivo de
 	 *                     log.
 	 */
-	private static void registrarLog(String metodo, String archivoEntrada, String archivoSalida) throws IOException {
+	private static void registrarLog(String metodo, String archivoEntrada, String archivoSalida) {
 		// Archivo de log donde se almacenarán los registros.
 		String logFile = "log_csv.txt";
+		
 		// Obtenemos la fecha y horo actual.
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
+		// Con el true no se sobreescribe
 		try (BufferedWriter escritor = new BufferedWriter(new FileWriter(logFile, true))) {
 			escritor.write("Método: " + metodo);
 			escritor.write(", Fecha y hora: " + timeStamp);
 			escritor.write(", Archivo entrada: " + archivoEntrada);
 			escritor.write(", Archivo salida: " + archivoSalida);
 			escritor.newLine();
+		} catch (IOException e) {
+			
 		}
 	}
 }
