@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import "./screens/MenuLateral.dart";
 
 void main(List<String> args) => runApp(const Principal());
 
@@ -7,38 +9,30 @@ class Principal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        title: "Prueba",
-        home: Row(
-          children: [
-            Icon(
-              Icons.favorite,
-              size: 120,
-              color: Colors.lightBlue,
-            ),
-            Icon(
-              Icons.star,
-              size: 120,
-              color: Colors.yellow,
-            ),
-            Icon(
-              Icons.cancel,
-              size: 120,
-              color: Colors.red,
-            )
-          ],
-        )
-
-        /* home: Center(
-          child: Text(
-        "Prueba para cambiar fuentes",
-        style: TextStyle(
-          color: Colors.pink[300],
-          decoration: TextDecoration.none,
-          fontSize: 40,
-          
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red[400],
+          title: Text("Rel1"),
         ),
-      )), */
-        );
+        backgroundColor: const Color(0xFF080808),
+        drawer: const MenuLateral(),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Relación 1',
+                style: GoogleFonts.anton(
+                  fontSize: 64,
+                  color: Colors.red[500]
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
