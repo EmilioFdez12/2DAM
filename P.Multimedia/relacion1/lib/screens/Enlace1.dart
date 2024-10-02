@@ -23,7 +23,7 @@ class Enlace1 extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            Text(
+            SelectableText(
               'https://github.com/EmilioFdez12/2DAM/tree/main/P.Multimedia',
               style: GoogleFonts.anton(
                 fontSize: 14,

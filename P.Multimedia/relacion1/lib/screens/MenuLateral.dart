@@ -18,8 +18,8 @@ class MenuLateral extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
-                        "https://media.istockphoto.com/id/483724081/es/foto/valle-de-yosemite-paisaje-y-al-r%C3%ADo-california.jpg?s=612x612&w=0&k=20&c=3BjbGX_OWw-kZ7BR1E2xq9SN0pFg46-MQI4wtwJ883o="),
-                    fit: BoxFit.cover)),
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY5-Yclp9mGDw9I1oK89E0OkpD91Ci7ePTaQ&s"),
+                    fit: BoxFit.fill)),
           ),
           Ink(
             color: Colors.indigo,
@@ -37,6 +37,30 @@ class MenuLateral extends StatelessWidget {
           ),
           ListTile(
             title: const Text("Enlace2"),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const Enlace2()));
+            },
+          ),
+          ListTile(
+            title: const Text("Enlace3"),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const Enlace2()));
+            },
+          ),
+          ListTile(
+            title: const Text("Enlace4"),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const Enlace2()));
+            },
+          ),
+          ListTile(
+            title: const Text("Enlace5"),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
