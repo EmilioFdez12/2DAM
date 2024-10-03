@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:relacion1/screens/Enlace3.dart';
+import 'package:relacion1/screens/Enlace4.dart';
 import 'Enlace1.dart';
 import 'Enlace2.dart';
 
@@ -22,7 +24,7 @@ class MenuLateral extends StatelessWidget {
                     fit: BoxFit.fill)),
           ),
           Ink(
-            color: Colors.indigo,
+            color: const Color(0xFF080808),
             child: ListTile(
               title: const Text(
                 "Enlace 1",
@@ -48,7 +50,7 @@ class MenuLateral extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const Enlace2()));
+                  builder: (BuildContext context) => const Enlace3()));
             },
           ),
           ListTile(
@@ -56,15 +58,7 @@ class MenuLateral extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const Enlace2()));
-            },
-          ),
-          ListTile(
-            title: const Text("Enlace5"),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const Enlace2()));
+                  builder: (BuildContext context) => const Enlace4()));
             },
           ),
         ],
