@@ -1,22 +1,14 @@
 package mainApp;
 
-import java.awt.EventQueue;
 import jframeApp.SwingApp;
 
-
+/**
+ * Clase para Iniciar la App
+ */
 public class MainApp {
 	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SwingApp frame = new SwingApp();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
+		SwingApp swing = new SwingApp();
+		swing.setVisible(true);
 	}
 }
