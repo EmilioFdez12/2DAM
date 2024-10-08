@@ -30,5 +30,10 @@ public class Cliente {
 		return provincia;
 	}
 	
+	@Override
+	public String toString() {
+	    return "👤 Cliente: " + nombre.toUpperCase() + " " + apellido.toUpperCase() + " | Edad: " + edad + " años | Provincia: " + provincia;
+	}
+
 	
 }
