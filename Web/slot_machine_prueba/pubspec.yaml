@@ -1,0 +1,26 @@
+name: slot_machine_prueba
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_slot_machine: ^0.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:  
+  uses-material-design: true  
+  assets:    
+    - assets/images/roll_item_VAR.png
+    - assets/images/roll_item_Seven.png
+    - assets/images/roll_item_tenis.png
+    - assets/images/roll_item_basketball.png
+    - assets/images/roll_item_F1.png
