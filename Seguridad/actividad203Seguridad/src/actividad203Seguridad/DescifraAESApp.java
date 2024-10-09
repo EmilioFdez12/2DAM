@@ -15,7 +15,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class CifraAESApp {
+public class DescifraAESApp {
 
 	private static String instanciaFabricaCLave = "PBKDF2WithHmacSHA256";
 	private static final String MENSAJE_DEFAULT = "Mensaje de Prueba";
@@ -26,27 +26,18 @@ public class CifraAESApp {
 	private String mensaje;
 	private char[] password;
 
-	public CifraAESApp(String instanciaFabricaCLave, byte[] salt, int iterations, int keySize, String mensaje,
+	public DescifraAESApp(String instanciaFabricaCLave, byte[] salt, int iterations, int keySize, String mensaje,
 			char[] password) {
-		super();
 		this.instanciaFabricaCLave = instanciaFabricaCLave;
-		CifraAESApp.salt = salt;
-		CifraAESApp.iterations = iterations;
-		CifraAESApp.keySize = keySize;
+		DescifraAESApp.salt = salt;
+		DescifraAESApp.iterations = iterations;
+		DescifraAESApp.keySize = keySize;
 		this.mensaje = mensaje;
 		this.password = password;
 	}
 
 	public String getInstanciaFabricaCLave() {
 		return instanciaFabricaCLave;
-	}
-
-	public static String getMensajeDefault() {
-		return MENSAJE_DEFAULT;
-	}
-
-	public static char[] getPasswordDefault() {
-		return PASSWORD_DEFAULT;
 	}
 
 	public byte[] getSalt() {
@@ -64,38 +55,47 @@ public class CifraAESApp {
 	public Key getClaveCifrado() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Preparamos la clave a utilizar HMAC
 		SecretKeyFactory fabricaClave = SecretKeyFactory.getInstance(this.getInstanciaFabricaCLave());
-		// Indico la PBE a utilizar con la clave, el salt, las iteraciones y el tamaño
-		// de clave
-		PBEKeySpec especificaClave = new PBEKeySpec(this.getPasswordDefault(), this.getSalt(), this.getIterations(),
-				this.getKeySize());
-		// Genero una clave secreta con el tipo de fábrica y las especificaciones de la
-		// clave
+		// Especificamos la PBE a utilizar con la clave, el salt, las iteraciones y el tamaño de clave
+		PBEKeySpec especificaClave = new PBEKeySpec(this.password, this.getSalt(), this.getIterations(), this.getKeySize());
+		// Genero una clave secreta con el tipo de fábrica y las especificaciones de la clave
 		SecretKey claveSecreta = fabricaClave.generateSecret(especificaClave);
-		// Aquí usamos 'claveSecreta' para generar la clave AES
+		// Generamos la clave AES
 		Key key = new SecretKeySpec(claveSecreta.getEncoded(), "AES");
 
 		return key;
 	}
 
-	public String cifrarMensaje()
+	public String descifrarMensaje(String mensajeCifrado)
 			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidKeySpecException, IllegalBlockSizeException, BadPaddingException {
 
+		// Decodificar el mensaje cifrado de Base64 a bytes
+		byte[] mensajeCifradoBytes = Base64.getDecoder().decode(mensajeCifrado);
+		
 		Cipher cifrador = Cipher.getInstance("AES");
-		cifrador.init(Cipher.ENCRYPT_MODE, this.getClaveCifrado());
-		byte[] textoCipher = cifrador.doFinal(mensaje.getBytes());
+		cifrador.init(Cipher.DECRYPT_MODE, this.getClaveCifrado());
+		byte[] textoDescifradoBytes = cifrador.doFinal(mensajeCifradoBytes);
 		
-		String textoCifrado = Base64.getEncoder().encodeToString(textoCipher);
+		// Convertir los bytes descifrados a cadena
+		String textoDescifrado = new String(textoDescifradoBytes);
 		
-		return textoCifrado;
+		return textoDescifrado;
 	}
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 
 		String mensaje = args.length > 0 ? args[0] : MENSAJE_DEFAULT;
 		char[] password = args.length > 1 ? args[1].toCharArray() : PASSWORD_DEFAULT;
-
+		
+		// Instancias de cifrado y descifrado
+		DescifraAESApp descifraAES = new DescifraAESApp(instanciaFabricaCLave, salt, iterations, keySize, mensaje, password);
 		CifraAESApp cifraAES = new CifraAESApp(instanciaFabricaCLave, salt, iterations, keySize, mensaje, password);
 		
-		System.out.println(cifraAES.cifrarMensaje());
+		// Cifrar el mensaje
+		String mensajeCifrado = cifraAES.cifrarMensaje();
+		System.out.println("Mensaje cifrado: " + mensajeCifrado);
+		
+		// Descifrar el mensaje
+		String mensajeDescifrado = descifraAES.descifrarMensaje(mensajeCifrado);
+		System.out.println("Mensaje descifrado: " + mensajeDescifrado);
 	}
 }

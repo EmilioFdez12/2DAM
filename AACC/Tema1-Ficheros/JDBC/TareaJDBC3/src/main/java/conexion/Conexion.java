@@ -13,7 +13,7 @@ public class Conexion {
 	private static final String BBDD = "sakila";
 	private static final String PARAMETROS = "?serverTimezone=UTC";
 	private static final String USUARIO = "root";
-	private static final String CLAVE = "1234";
+	private static final String CLAVE = "Emilio@0910";
 
 	public static Connection conectar() {
 		Connection conexion = null;
