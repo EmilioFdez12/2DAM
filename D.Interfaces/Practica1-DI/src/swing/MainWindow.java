@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import main.MainApp;
 import utils.Cliente;
+import utils.Producto;
 
 import javax.swing.JMenuBar;
 import javax.swing.JPopupMenu;
@@ -30,7 +31,9 @@ public class MainWindow extends JFrame {
   private JMenu mnClientes;
   private JMenu mnProductos;
   private JList<Cliente> listClientes;
-  private DefaultListModel<Cliente> modelClientes;  // Modelo para la lista de clientes
+  private DefaultListModel<Cliente> modelClientes;
+  private ListarProductos listarProductos;
+
 
   /**
    * Create the frame.
@@ -88,8 +91,7 @@ public class MainWindow extends JFrame {
       
       modelClientes = new DefaultListModel<>();  // Inicializa el modelo de la lista
       listClientes = new JList<>(modelClientes);
-      scrollPane.setViewportView(listClientes);
-      
+      scrollPane.setViewportView(listClientes);     
       
       clientesDefault();
       
@@ -146,7 +148,7 @@ public class MainWindow extends JFrame {
   public DefaultListModel<Cliente> getModelClientes() {
       return modelClientes;
   }
-
+  
   private void abrirVentanaAltaCliente() {
       AltaClientes ventanaAltaCliente = new AltaClientes(this); // Pasa la referencia de MainWindow
       ventanaAltaCliente.setVisible(true); // Muestra la ventana
@@ -158,7 +160,7 @@ public class MainWindow extends JFrame {
   }
 
   private void abrirVentanaAltaProductos() {
-      AltaProductos ventanaAltaProductos = new AltaProductos();
+	AltaProductos ventanaAltaProductos = new AltaProductos(listarProductos);
       ventanaAltaProductos.setVisible(true);
   }
 
@@ -166,4 +168,7 @@ public class MainWindow extends JFrame {
       ListarProductos ventanaListarProductos = new ListarProductos();
       ventanaListarProductos.setVisible(true);
   }
+
+
+
 }
