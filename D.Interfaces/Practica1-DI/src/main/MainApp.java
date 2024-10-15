@@ -1,6 +1,6 @@
 package main;
 
-import swing.MainWindow;
+import gui.MainWindow;
 
 public class MainApp {
 

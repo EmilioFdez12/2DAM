@@ -22,12 +22,12 @@ public class Producto {
 	}
 
 	public String isPerecedero() {
-		return perecedero ? "Si" : "No";	
+		return perecedero ? "Si" : "No";
 	}
 
 	@Override
 	public String toString() {
-		return "👤 Producto: " + nombre.toUpperCase() + " " + " | Precio Unitario: " + precioUnitario
+		return "📦 Producto: " + nombre.toUpperCase() + " " + " | Precio Unitario: " + precioUnitario
 				+ " € | Perecedero: " + isPerecedero();
 	}
 

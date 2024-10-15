@@ -1,49 +1,44 @@
-package swing;
+// Clase ListarProductos
+package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-
 import utils.Producto;
+import java.awt.Color;
 
 public class ListarProductos extends JFrame {
-	
-	private DefaultListModel<Producto> modelProductos;
+
+    private DefaultListModel<Producto> modelProductos;
     private static final long serialVersionUID = 1L;
-    private JList jListProductos;
-    
+    private JList<Producto> jListProductos;
+
     // Constructor
     public ListarProductos() {
+        // Configura la ventana (tamaño, agregar lista, etc.)
         setTitle("Listar Productos");
-        setBounds(825, 450, 506, 387);
+        setBounds(825, 450, 484, 346);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        // Panel para el formulario de alta
+
+        // Panel para la lista de productos
         JPanel panel = new JPanel();
-        
-        // Añadir el panel a la ventana
         getContentPane().add(panel);
         panel.setLayout(null);
-        
+
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 11, 470, 326);
+        scrollPane.setBounds(10, 11, 448, 285);
         panel.add(scrollPane);
-               
-        modelProductos = new DefaultListModel<>();  // Inicializa el modelo de la lista
+
+        modelProductos = new DefaultListModel<>();
         jListProductos = new JList<>(modelProductos);
+        jListProductos.setBackground(new Color(207, 224, 208));
         scrollPane.setViewportView(jListProductos);
-        
+
         productosDefault();
-        
-        
-        // Hacer visible la ventana
         setVisible(true);
-        
-        
-    }
+    }   
     
     private void productosDefault() {
     	modelProductos.addElement(new Producto("Manzanas", 1.20, true));
@@ -86,8 +81,7 @@ public class ListarProductos extends JFrame {
 
     }
     
-    public DefaultListModel<Producto> getModelProductos() {	
-  		return modelProductos;
-  	}
-
+    public DefaultListModel<Producto> getModelProducto(){
+		return modelProductos;
+	}
 }

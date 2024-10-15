@@ -6,7 +6,7 @@ public class Cliente {
 	private String apellido;
 	private int edad;
 	private String provincia;
-	
+
 	public Cliente(String nombre, String apellido, int edad, String provincia) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -29,11 +29,11 @@ public class Cliente {
 	public String getProvincia() {
 		return provincia;
 	}
-	
+
 	@Override
 	public String toString() {
-	    return "👤 Cliente: " + nombre.toUpperCase() + " " + apellido.toUpperCase() + " | Edad: " + edad + " años | Provincia: " + provincia;
+		return "👤 Cliente: " + nombre.toUpperCase() + " " + apellido.toUpperCase() + " | Edad: " + edad
+				+ " años | Provincia: " + provincia;
 	}
 
-	
 }
