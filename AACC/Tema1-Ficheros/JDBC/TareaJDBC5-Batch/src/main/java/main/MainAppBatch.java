@@ -12,7 +12,7 @@ public class MainAppBatch {
 
 	// Consulta para insertar usuarios
 	private static final String INSERTAR_USUARIO = "INSERT INTO usuarios (nombre, clave) VALUES (?, ?)";
-	private static int batchSize = 5; // Tamaño del batch
+	private static final int BATCH_SIZE = 5; // Tamaño del batch
 
 	public static void main(String[] args) throws Exception {
 		// Mapa de usuarios con nombre como clave y contraseña como valor
@@ -43,7 +43,7 @@ public class MainAppBatch {
 			try {
 				conn.setAutoCommit(false);
 
-				// Preparar la sentencia
+				// Preparamos la sentencia
 				PreparedStatement pst = conn.prepareStatement(INSERTAR_USUARIO);
 				int count = 0;
 
@@ -55,16 +55,18 @@ public class MainAppBatch {
 					count++;
 
 					// Ejecutamos el batch cuando el contador alcanza el tamaño del batch (5)
-					if (count % batchSize == 0) {
+					if (count % BATCH_SIZE == 0) {
 						// Ejecutar el batch
 						pst.executeBatch();
+						pst.clearBatch();
 					}
 				}
 
-				// Ejecutar cualquier inserción restante que no haya sido ejecutada
+				// Ejecutamos cualquier inserción restante que no haya sido ejecutada
 				pst.executeBatch();
+				pst.clearBatch();
 
-				// Confirmar los cambios
+				
 				conn.commit();
 				System.out.println("Usuarios insertados correctamente");
 
